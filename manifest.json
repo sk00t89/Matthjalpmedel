@@ -16,14 +16,5 @@
       "type": "image/png",
       "sizes": "512x512"
     }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "public/font/ProximaNova-Reg-webfont.woff2",
-        "public/font/ProximaNova-Bold-webfont.woff2"
-      ],
-      "matches": ["<all_urls>"]
-    }
   ]
 }
