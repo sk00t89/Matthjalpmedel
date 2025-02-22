@@ -1,0 +1,272 @@
+
+@media only screen and (max-width: 600px) { /* Anpassa för mobil */
+    body {
+        background-color: black; /* Nu fungerar bakgrundsfärgen */
+    }
+
+    .måttLista li {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .mått-container {
+        flex: 1; /* Tar upp all plats mellan vänster och höger */
+        text-align: left;
+        display: flex;
+        flex-wrap: wrap; /* Gör så att elementen bryter rad om det behövs */
+        gap: 5px; /* Avstånd mellan mått */
+    }
+    .mått-container p {
+        padding: 5px 0;
+    }
+
+    .checkbox {
+        order: -1; /* Flytta checkbox högst upp */
+    }
+
+    .index {
+        order: 0; /* Håll index bredvid checkbox */
+    }
+
+    .mått {
+        width: 100%; /* Låt mått breddas istället för att gå utanför */
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .remove-btn {
+        width: 100%;
+        margin-top: 5px;
+    }
+    .btnDiv {
+        display: flex;
+        gap: 5px;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+/* Generella stilregler */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f1f1;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.select-menu {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* Formulär */
+.inputform {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Två kolumner */
+    gap: 1rem;
+    width: 70vw;
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.inputform input {
+    border: 2px solid darkslategrey;
+    border-radius: 5px;
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+/* Färger för måtten */
+.index {
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    padding: 2px 6px;
+    border-radius: 4px;
+    min-width: 30px;
+    text-align: center;
+}
+
+
+.tak {
+    color: blue;
+    font-weight: bold;
+}
+
+.vVägg {
+    color: green;
+    font-weight: bold;
+}
+.hVägg {
+    color: purple;
+    font-weight: bold;
+}
+
+.botten {
+    color: red;
+    font-weight: bold;
+}
+
+.mått {
+    color: black;
+    font-weight: bold;
+}
+
+/* Färger för input */
+#takmått, #vänster-vägg, #höger-vägg, #botten {
+    background-color: rgba(0, 0, 255, 0.1); /* Ljusblå för takmått */
+    border-color: blue;
+}
+
+#vänster-vägg {
+    background-color: rgba(0, 255, 0, 0.1); /* Ljusgrön för vänster vägg */
+    border-color: green;
+}
+
+#höger-vägg {
+    background-color: rgba(0, 0, 255, 0.1); /* Ljuscyan för höger vägg */
+    border-color: purple;
+}
+
+#botten {
+    background-color: rgba(255, 0, 0, 0.1); /* Ljusröd för botten */
+    border-color: red;
+}
+
+
+
+.måttLista li {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.måttLista .left-section {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Skapar avstånd mellan checkbox och index */
+    min-width: 10px; /* Förhindrar att de hoppar runt */
+    flex-direction: row;
+}
+.mått-container {
+    flex: 1; /* Tar upp all plats mellan vänster och höger */
+    text-align: left;
+    display: flex;
+    gap: 10px; /* Avstånd mellan mått */
+    margin: auto;
+    padding: 0 5px;
+}
+
+/* Knappar till höger */
+.right-section {
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+
+
+
+.måttLista input {
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+
+.remove-btn {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+
+
+.btnDiv {
+    display: flex;
+    gap: 10px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+p, button, li {
+    font-size: 18px;
+}
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.generera-btn {
+    background-color: darkslategray;
+    color: white;
+}
+.rensa-btn {
+    background-color: crimson;
+    color: white;
+}
+button:hover {
+    opacity: 0.8;
+}
+
+
+.kapad {
+    text-decoration: line-through;
+    color: gray;
+    opacity: 0.5;
+}
+.checkbox {
+    width: 15px;
+    height: 15px;
+}
+
+@font-face {
+    font-family: 'Proxima Nova';
+    src: url('/public/font/ProximaNova-Reg-webfont.woff2') format('woff2'),
+         url('/public/font/ProximaNova-Bold-webfont.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  body {
+    font-family: 'Proxima Nova', sans-serif;
+  }
+  
