@@ -60,7 +60,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #f1f1f1;
-    height: 100vh;
+    //height: 100vh;
     font-family: 'Arial', sans-serif;
 }
 .signature {
@@ -123,7 +123,6 @@ h1 {
     text-align: center;
 }
 
-
 .tak {
     color: blue;
     font-weight: bold;
@@ -169,8 +168,6 @@ h1 {
     border-color: red;
 }
 
-
-
 .måttLista li {
     display: flex;
     flex-wrap: wrap;
@@ -202,13 +199,16 @@ h1 {
 /* Knappar till höger */
 .right-section {
     display: flex;
-    justify-content: flex-end;
-
+    flex-direction: column; /* Staplar elementen vertikalt */
+    align-items: center;
 }
 
-
-
-
+.glas-val-container {
+    margin-top: 5px; /* Skapar utrymme mellan knappen och texten */
+    text-align: center;
+    font-size: 14px; /* Gör texten mindre om det behövs */
+    color: #333; /* Färg för bättre synlighet */
+}
 .måttLista input {
     transform: scale(1.2);
     margin-right: 10px;
@@ -253,7 +253,6 @@ button:hover {
     opacity: 0.8;
 }
 
-
 .kapad {
     text-decoration: line-through;
     color: gray;
@@ -267,12 +266,24 @@ button:hover {
 @font-face {
     font-family: 'Proxima Nova';
     src: url('/public/font/ProximaNova-Reg-webfont.woff2') format('woff2'),
-         url('/public/font/ProximaNova-Bold-webfont.woff2') format('woff2');
+    url('/public/font/ProximaNova-Bold-webfont.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
-  }
-  
-  body {
+}
+
+body {
     font-family: 'Proxima Nova', sans-serif;
-  }
-  
+}
+
+.checkbox-glas-div {
+    display: flex; /* Gör att checkboxarna hamnar i rad */
+    gap: 20px; /* Skapar mellanrum mellan elementen */
+    padding-top: 8px;
+}
+
+.checkbox-item {
+    display: flex;
+    flex-direction: column; /* Gör att texten hamnar ovanför checkboxen */
+    align-items: center; /* Centrerar text och checkbox */
+    text-align: center;
+}
