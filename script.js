@@ -79,16 +79,22 @@ const clearInputs = () => {
 
 const generateMeasure = (t, v, h, b) => {
     if (![t, v, h, b].some(val => val > 100)) {
-        alert("Du har inte fyllt i mått.");
+        alert("Du har angivit felaktiga mått.");
         return;
     }
 
     const öppningsNummer = kapMått.length + 1;
     const kapMåttObject = { öppning: öppningsNummer, tak: t, botten: b };
 
-    if (v) kapMåttObject.vVägg = v - takprofil;
+    if (v && t) kapMåttObject.vVägg = v - takprofil;
+    if (h && t) kapMåttObject.hVägg = h - takprofil;
+    if (b && t && !v && !h) kapMåttObject.botten = b;
+    if (b && v) kapMåttObject.botten = b - väggprofil;
+    if (b && h) kapMåttObject.botten = b - väggprofil;
+    if (b && h && v) kapMåttObject.botten = b - väggprofil * 2;
     if (h) kapMåttObject.hVägg = h - takprofil;
-    if (b) kapMåttObject.botten = b - väggprofil * (v && h ? 2 : 1);
+    if (v) kapMåttObject.vVägg = v - takprofil;
+
 
     kapMått.push(kapMåttObject);
     localStorage.setItem("data", JSON.stringify(kapMått));
@@ -96,7 +102,6 @@ const generateMeasure = (t, v, h, b) => {
     updatemåttLista();
     clearInputs();
 };
-
 
 
 
