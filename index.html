@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#000000">
     <title>Måtthjälpmedel</title>
 </head>
-    
+
 <body>
 <p class="signature">En App av Mark Eriksson</p>
 <h1>Måtthjälpmedel</h1>
@@ -46,6 +46,21 @@
     </div>
 
 </form>
+<div class="checkbox-glas-div">
+    <div class="checkbox-item">
+        <p class="glas-typ">10/12mm glas</p>
+        <input type="checkbox" class="checkbox-glas" id="10/12-glas" value="25mm profil">
+    </div>
+    <div class="checkbox-item">
+        <p class="glas-typ">16mm glas</p>
+        <input type="checkbox" class="checkbox-glas" id="16-glas" value="30mm profil">
+    </div>
+    <div class="checkbox-item">
+        <p class="glas-typ">20mm glas</p>
+        <input type="checkbox" class="checkbox-glas" id="20-glas" value="35mm profil">
+    </div>
+</div>
+
 
 <div class="btnDiv">
     <button class="generera-btn" id="generera-btn">Generera kapmått</button>
@@ -60,10 +75,10 @@
 </div>
 
 <script src="script.js"></script>
-    <script>if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('/Matthjalpmedel/service-worker.js')
-    .then(() => console.log("Service Worker registrerad!"))
-    .catch((error) => console.log("Service Worker misslyckades: ", error));
+<script>if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/Matthjalpmedel/service-worker.js')
+        .then(() => console.log("Service Worker registrerad!"))
+        .catch((error) => console.log("Service Worker misslyckades: ", error));
 }</script>
 </body>
 </html>
