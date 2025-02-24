@@ -24,9 +24,6 @@ const getCheckboxValue = () => {
 };
 
 
-
-
-
 let takprofil = 40;
 let väggprofil = 40;
 const mätData = JSON.parse(localStorage.getItem("data")) || [];
@@ -35,6 +32,13 @@ let kapMått = [...mätData];
 const updatemåttLista = () => {
     const lista = document.getElementById("måttLista");
 
+    // 1. Spara checkbox-status innan listan rensas
+    const checkedStates = {};
+    document.querySelectorAll(".checkbox").forEach((checkbox, index) => {
+        checkedStates[index] = checkbox.checked;
+    });
+
+    lista.innerHTML = ""; // Rensa listan innan uppdatering
 
     kapMått.forEach((obj, index) => {
         const li = document.createElement("li");
@@ -59,14 +63,32 @@ const updatemåttLista = () => {
                 </div>
             </div>
         `;
+
+        lista.appendChild(li);
+
+        // 3. Återställ checkbox-status om den fanns sparad
         const checkbox = li.querySelector(".checkbox");
+        if (checkedStates[index]) {
+            checkbox.checked = true;
+            li.classList.add("kapad");
+        }
+
+        // 4. Lägg till event listener för att markera avklarade mått
         checkbox.addEventListener("change", () => {
             li.classList.toggle("kapad", checkbox.checked);
         });
+    });
 
-        lista.appendChild(li);
+    // 5. Lägg till event listeners på "Ta bort"-knappar
+    document.querySelectorAll(".remove-btn").forEach(button => {
+        button.addEventListener("click", (event) => {
+            const index = event.target.getAttribute("data-index");
+            kapMått.splice(index, 1); // Ta bort från arrayen
+            updatemåttLista(); // Uppdatera listan
+        });
     });
 };
+
 
 updatemåttLista();
 
@@ -139,11 +161,12 @@ clearBtn.addEventListener("click", () => {
     vVInput.value = "";
     hVInput.value = "";
     bInput.value = "";
-    kapMått.length = 0;
+
+    kapMått = []; // Skapa en ny tom array istället för att ändra längden
     localStorage.removeItem("data");
-    kapMått = [];
-    updatemåttLista();
+    updatemåttLista(); // Uppdatera listan så att den blir tom
 });
+
 
 outputList.addEventListener("click", (e) => {
     if (e.target.classList.contains("remove-btn")) {
