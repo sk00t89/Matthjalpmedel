@@ -8,6 +8,24 @@ const clearBtn = document.getElementById("rensa-btn");
 const removeItem = document.getElementById("remove-btn");
 const checkbox = document.getElementsByClassName("kapad-checkbox");
 const select = document.getElementById("select-menu");
+const glasTyp10 = document.getElementById("10/12-glas");
+const glasTyp16 = document.getElementById("16-glas");
+const glasTyp20 = document.getElementById("20-glas");
+
+
+const getCheckboxValue = () => {
+    let checkboxValue = [];
+    document.querySelectorAll(".checkbox-glas").forEach(checkbox => {
+        if (checkbox.checked) {
+            checkboxValue.push(checkbox.value);
+        }
+    });
+    return checkboxValue.toString();
+};
+
+
+
+
 
 let takprofil = 40;
 let väggprofil = 40;
@@ -16,7 +34,7 @@ let kapMått = [...mätData];
 
 const updatemåttLista = () => {
     const lista = document.getElementById("måttLista");
-    lista.innerHTML = ""; // Töm listan innan vi lägger till nya element
+
 
     kapMått.forEach((obj, index) => {
         const li = document.createElement("li");
@@ -36,6 +54,9 @@ const updatemåttLista = () => {
 
             <div class="right-section">
                 <button class="remove-btn" data-index="${index}">Ta bort</button>
+                <div class="glas-val-container">
+                    <p class="glas-val">${getCheckboxValue()}</p>
+                </div>
             </div>
         `;
         const checkbox = li.querySelector(".checkbox");
@@ -74,7 +95,10 @@ const clearInputs = () => {
     vVInput.value = "";
     hVInput.value = "";
     bInput.value = "";
-}
+    glasTyp10.checked = false;
+    glasTyp16.checked = false;
+    glasTyp20.checked = false;
+};
 
 
 const generateMeasure = (t, v, h, b) => {
@@ -105,6 +129,7 @@ const generateMeasure = (t, v, h, b) => {
 
 
 
+
 generateBtn.addEventListener("click", () => {
     generateMeasure(parseInt(takInput.value), parseInt(vVInput.value), parseInt(hVInput.value), parseInt(bInput.value));
 
@@ -129,4 +154,3 @@ outputList.addEventListener("click", (e) => {
     }
 
 })
-
