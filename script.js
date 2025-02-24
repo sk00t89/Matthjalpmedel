@@ -32,7 +32,7 @@ let kapMått = [...mätData];
 const updatemåttLista = () => {
     const lista = document.getElementById("måttLista");
 
-    // 1. Spara checkbox-status innan listan rensas
+    // Spara checkbox-status innan listan rensas
     const checkedStates = {};
     document.querySelectorAll(".checkbox").forEach((checkbox, index) => {
         checkedStates[index] = checkbox.checked;
@@ -59,27 +59,28 @@ const updatemåttLista = () => {
             <div class="right-section">
                 <button class="remove-btn" data-index="${index}">Ta bort</button>
                 <div class="glas-val-container">
-                    <p class="glas-val">${getCheckboxValue()}</p>
+                    <p class="glas-val">Profil: <strong>${obj.glastyp || "Ej valt"}</strong></p>
                 </div>
             </div>
         `;
 
+
         lista.appendChild(li);
 
-        // 3. Återställ checkbox-status om den fanns sparad
+        // Återställ checkbox-status
         const checkbox = li.querySelector(".checkbox");
         if (checkedStates[index]) {
             checkbox.checked = true;
             li.classList.add("kapad");
         }
 
-        // 4. Lägg till event listener för att markera avklarade mått
+        // Lägg till eventlistener för checkbox
         checkbox.addEventListener("change", () => {
             li.classList.toggle("kapad", checkbox.checked);
         });
     });
 
-    // 5. Lägg till event listeners på "Ta bort"-knappar
+    // Lägg till event listeners på "Ta bort"-knappar
     document.querySelectorAll(".remove-btn").forEach(button => {
         button.addEventListener("click", (event) => {
             const index = event.target.getAttribute("data-index");
@@ -130,7 +131,12 @@ const generateMeasure = (t, v, h, b) => {
     }
 
     const öppningsNummer = kapMått.length + 1;
-    const kapMåttObject = { öppning: öppningsNummer, tak: t, botten: b };
+    const kapMåttObject = {
+        öppning: öppningsNummer,
+        tak: t,
+        botten: b,
+        glastyp: getCheckboxValue() || "Ej valt" // Anropa funktionen här
+    };
 
     if (v && t) kapMåttObject.vVägg = v - takprofil;
     if (h && t) kapMåttObject.hVägg = h - takprofil;
@@ -141,13 +147,13 @@ const generateMeasure = (t, v, h, b) => {
     if (h) kapMåttObject.hVägg = h - takprofil;
     if (v) kapMåttObject.vVägg = v - takprofil;
 
-
     kapMått.push(kapMåttObject);
     localStorage.setItem("data", JSON.stringify(kapMått));
 
     updatemåttLista();
     clearInputs();
 };
+
 
 
 
