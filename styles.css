@@ -258,7 +258,7 @@ button:hover {
     color: gray;
     opacity: 0.5;
 }
-.checkbox, checkbox-glas {
+.checkbox, .checkbox-glas {
     width: 15px;
     height: 15px;
 }
