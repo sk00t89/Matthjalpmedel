@@ -287,3 +287,21 @@ body {
     align-items: center; /* Centrerar text och checkbox */
     text-align: center;
 }
+#installBtn {
+    position: fixed;       /* Fäster knappen på skärmen */
+    top: 10px;             /* Avstånd från toppen */
+    left: 10px;            /* Avstånd från vänster */
+    z-index: 1000;         /* Se till att knappen är ovanpå andra element */
+    padding: 10px 20px;    /* Lite padding för att göra knappen större */
+    background-color: #007bff; /* Färgen på knappen (kan ändras) */
+    color: white;          /* Textfärg */
+    border: none;          /* Ta bort standardkanterna */
+    border-radius: 5px;    /* Rundade hörn */
+    font-size: 16px;       /* Textstorlek */
+    cursor: pointer;      /* Visar att det är klickbart */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Skugga för att ge knappen ett lyft utseende */
+}
+
+#installBtn:hover {
+    background-color: #0056b3; /* Ändrar färg vid hover */
+}
