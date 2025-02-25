@@ -213,4 +213,37 @@ outputList.addEventListener("click", (e) => {
         updatemåttLista();
     }
 
-})
+});
+
+let deferredPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Förhindra den automatiska prompten
+    e.preventDefault();
+    deferredPrompt = e;
+
+    // Gör installationsknappen synlig
+    const installButton = document.getElementById('installBtn');
+    installButton.style.display = 'block';
+
+    // Lägg till eventlistener på knappen
+    installButton.addEventListener('click', () => {
+        // Visa installationsprompten när knappen klickas
+        deferredPrompt.prompt();
+
+        // Vänta på användarens val
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('Användaren installerade appen');
+            } else {
+                console.log('Användaren avböjde installationen');
+            }
+            deferredPrompt = null;
+        });
+    });
+});
+
+// Dölj knappen om appen redan är installerad
+if (window.matchMedia('(display-mode: standalone)').matches) {
+    document.getElementById('installBtn').style.display = 'none';
+}
