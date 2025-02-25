@@ -12,6 +12,28 @@ const glasTyp10 = document.getElementById("10/12-glas");
 const glasTyp16 = document.getElementById("16-glas");
 const glasTyp20 = document.getElementById("20-glas");
 
+let wakeLock;
+
+async function keepScreenOn() {
+    try {
+        wakeLock = await navigator.wakeLock.request("screen");
+        console.log("Wake lock aktivt");
+    } catch (err) {
+        console.error("Wake lock misslyckades:", err);
+    }
+}
+
+// Kör funktionen när sidan laddas
+document.addEventListener("DOMContentLoaded", keepScreenOn);
+
+// Återaktivera Wake Lock om sidan blir synlig igen (t.ex. om användaren byter flik)
+document.addEventListener("visibilitychange", async () => {
+    if (wakeLock !== null && document.visibilityState === "visible") {
+        await keepScreenOn();
+    }
+});
+
+
 
 const getCheckboxValue = () => {
     let checkboxValue = [];
@@ -83,15 +105,23 @@ const updatemåttLista = () => {
     // Lägg till event listeners på "Ta bort"-knappar
     document.querySelectorAll(".remove-btn").forEach(button => {
         button.addEventListener("click", (event) => {
-            const index = event.target.getAttribute("data-index");
-            kapMått.splice(index, 1); // Ta bort från arrayen
-            updatemåttLista(); // Uppdatera listan
+            if (window.confirm("Vill du ta bort vald öppning?")) {
+                console.log("Användaren tryckte OK");
+                const li = event.target.closest("li"); // Hitta närmaste <li>
+                if (li) {
+                    li.remove(); // Tar bort endast detta <li> från DOM:en
+                }
+            } else {
+                console.log("Användaren tryckte Avbryt");
+                return;
+            }
+
         });
     });
 };
 
 
-updatemåttLista();
+
 
 
 select.addEventListener("change", () => {
@@ -163,14 +193,15 @@ generateBtn.addEventListener("click", () => {
 
 })
 clearBtn.addEventListener("click", () => {
-    takInput.value = "";
-    vVInput.value = "";
-    hVInput.value = "";
-    bInput.value = "";
 
-    kapMått = []; // Skapa en ny tom array istället för att ändra längden
-    localStorage.removeItem("data");
-    updatemåttLista(); // Uppdatera listan så att den blir tom
+    if(window.confirm("Ta bort alla mått?")) {
+        clearInputs();
+        kapMått = []; // Skapa en ny tom array istället för att ändra längden
+        localStorage.removeItem("data");
+        updatemåttLista(); // Uppdatera listan så att den blir tom
+    } else return;
+
+
 });
 
 
