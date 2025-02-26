@@ -11,6 +11,23 @@ const select = document.getElementById("select-menu");
 const glasTyp10 = document.getElementById("10/12-glas");
 const glasTyp16 = document.getElementById("16-glas");
 const glasTyp20 = document.getElementById("20-glas");
+const glasTypIso = document.getElementById("40-glas");
+const optionIso = document.getElementById("iso-glas");
+const optionList = document.getElementById("select-menu")
+
+let takprofil = 40;
+let väggprofil = 40;
+let mätData = JSON.parse(localStorage.getItem("data")) || [];
+let kapMått = [...mätData];
+
+glasTypIso.addEventListener("change", e => {
+    if (e.target.checked) {
+        optionList.value = optionIso.value;
+        console.log("iso glas ibockat")
+    }
+})
+
+
 
 let wakeLock;
 
@@ -46,28 +63,26 @@ const getCheckboxValue = () => {
 };
 
 
-let takprofil = 40;
-let väggprofil = 40;
-const mätData = JSON.parse(localStorage.getItem("data")) || [];
-let kapMått = [...mätData];
+
 
 const updatemåttLista = () => {
     const lista = document.getElementById("måttLista");
 
-    // Spara checkbox-status innan listan rensas
+    // Hämta tidigare markerade checkboxar
     const checkedStates = {};
-    document.querySelectorAll(".checkbox").forEach((checkbox, index) => {
-        checkedStates[index] = checkbox.checked;
+    document.querySelectorAll(".checkbox").forEach(checkbox => {
+        checkedStates[checkbox.id] = checkbox.checked;
     });
 
     lista.innerHTML = ""; // Rensa listan innan uppdatering
 
     kapMått.forEach((obj, index) => {
         const li = document.createElement("li");
+        li.setAttribute("data-index", obj.id);
 
         li.innerHTML = `
             <div class="left-section">
-                <input type="checkbox" class="checkbox" id="checkBox-${index}">
+                <input type="checkbox" class="checkbox" id="checkBox-${obj.id}">
                 <p class="index">${index + 1}</p>
             </div>
 
@@ -79,48 +94,35 @@ const updatemåttLista = () => {
             </div>
 
             <div class="right-section">
-                <button class="remove-btn" data-index="${index}">Ta bort</button>
+                <button class="remove-btn">Ta bort</button>
                 <div class="glas-val-container">
                     <p class="glas-val">Profil: <strong>${obj.glastyp || "Ej valt"}</strong></p>
                 </div>
             </div>
         `;
 
+        // Lägg till eventlyssnare för borttagningsknapp
+        li.querySelector(".remove-btn").addEventListener("click", () => deleteLi(li));
 
         lista.appendChild(li);
 
-        // Återställ checkbox-status
+        // Återställ checkbox-status baserat på ID istället för index
         const checkbox = li.querySelector(".checkbox");
-        if (checkedStates[index]) {
-            checkbox.checked = true;
-            li.classList.add("kapad");
-        }
+        checkbox.checked = checkedStates[`checkBox-${obj.id}`] || false;
+        if (checkbox.checked) li.classList.add("kapad");
 
         // Lägg till eventlistener för checkbox
         checkbox.addEventListener("change", () => {
             li.classList.toggle("kapad", checkbox.checked);
         });
     });
-
-    // Lägg till event listeners på "Ta bort"-knappar
-    document.querySelectorAll(".remove-btn").forEach(button => {
-        button.addEventListener("click", (event) => {
-            if (window.confirm("Vill du ta bort vald öppning?")) {
-                console.log("Användaren tryckte OK");
-                const li = event.target.closest("li"); // Hitta närmaste <li>
-                if (li) {
-                    li.remove(); // Tar bort endast detta <li> från DOM:en
-                }
-            } else {
-                console.log("Användaren tryckte Avbryt");
-                return;
-            }
-
-        });
-    });
 };
 
+// Ladda data från localStorage vid sidstart
+kapMått = JSON.parse(localStorage.getItem("data")) || [];
 
+// Uppdatera listan
+updatemåttLista();
 
 
 
@@ -136,6 +138,9 @@ select.addEventListener("change", () => {
             väggprofil = 30;
             console.log("45 är vald")
             break;
+        case "40-iso":
+            takprofil = 40;
+            väggprofil = 30;
         default:
             takprofil = 40;
             väggprofil = 40;
@@ -154,6 +159,28 @@ const clearInputs = () => {
 };
 
 
+const deleteLi = (button) => {
+    const li = button.closest("li"); // Hitta närmaste <li>
+    const id = li.getAttribute("data-index"); // Hämta id från data-attributet
+
+    // Hitta indexet på objektet som ska tas bort
+    const indexToRemove = kapMått.findIndex(obj => obj.id.toString() === id.toString());
+
+    if (indexToRemove !== -1) {
+        kapMått.splice(indexToRemove, 1); // Tar bort objektet från den globala arrayen
+    }
+
+    localStorage.setItem("data", JSON.stringify(kapMått));
+
+    // Ta bort endast den valda <li>-elementet från DOM
+    li.remove();
+
+    updatemåttLista();
+};
+
+
+
+
 const generateMeasure = (t, v, h, b) => {
     if (![t, v, h, b].some(val => val > 100)) {
         alert("Du har angivit felaktiga mått.");
@@ -165,7 +192,8 @@ const generateMeasure = (t, v, h, b) => {
         öppning: öppningsNummer,
         tak: t,
         botten: b,
-        glastyp: getCheckboxValue() || "Ej valt" // Anropa funktionen här
+        glastyp: getCheckboxValue() || "Ej valt", // Anropa funktionen här
+        id: `${öppningsNummer}-${Date.now().toString()}`
     };
 
     if (v && t) kapMåttObject.vVägg = v - takprofil;
@@ -204,16 +232,6 @@ clearBtn.addEventListener("click", () => {
 
 });
 
-
-outputList.addEventListener("click", (e) => {
-    if (e.target.classList.contains("remove-btn")) {
-        const index = Array.from(outputList.children).indexOf(e.target.closest("li"));
-        kapMått.splice(index, 1);
-        localStorage.setItem("data", JSON.stringify(kapMått));
-        updatemåttLista();
-    }
-
-});
 
 let deferredPrompt;
 
