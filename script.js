@@ -23,6 +23,8 @@ let kapMått = [...mätData];
 glasTypIso.addEventListener("change", e => {
     if (e.target.checked) {
         optionList.value = optionIso.value;
+        väggprofil = 30;
+        takprofil = 40;
         console.log("iso glas ibockat")
     }
 })
