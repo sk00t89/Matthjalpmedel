@@ -23,8 +23,6 @@ let kapMått = [...mätData];
 glasTypIso.addEventListener("change", e => {
     if (e.target.checked) {
         optionList.value = optionIso.value;
-        väggprofil = 30;
-        takprofil = 40;
         console.log("iso glas ibockat")
     }
 })
@@ -134,15 +132,19 @@ select.addEventListener("change", () => {
             takprofil = 30;
             väggprofil = 30;
             console.log("30 är vald")
+            console.log("takprofil:", takprofil, "väggprofil:", väggprofil);
             break;
         case "45":
             takprofil = 45;
             väggprofil = 30;
             console.log("45 är vald")
+            console.log("takprofil:", takprofil, "väggprofil:", väggprofil);
             break;
         case "40-iso":
             takprofil = 40;
             väggprofil = 30;
+            console.log("takprofil:", takprofil, "väggprofil:", väggprofil);
+            break;
         default:
             takprofil = 40;
             väggprofil = 40;
@@ -267,3 +269,4 @@ window.addEventListener('beforeinstallprompt', (e) => {
 if (window.matchMedia('(display-mode: standalone)').matches) {
     document.getElementById('installBtn').style.display = 'none';
 }
+
