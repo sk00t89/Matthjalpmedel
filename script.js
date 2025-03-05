@@ -22,13 +22,11 @@ let kapMått = [...mätData];
 
 glasTypIso.addEventListener("change", e => {
     if (e.target.checked) {
-        optionList.value = optionIso.value;
-        takprofil = 40;
-        väggprofil = 30;
-        console.log("iso glas i-bockat");
-        console.log("takprofil:", takprofil, "väggprofil:", väggprofil);
+        optionList.value = optionIso.value; // Uppdaterar select
+        optionList.dispatchEvent(new Event("change")); // Tvingar select att köra sitt event
+        console.log("iso glas i-bockat, optionList ändrad till:", optionList.value);
     }
-})
+});
 
 
 
@@ -130,29 +128,31 @@ updatemåttLista();
 
 
 select.addEventListener("change", () => {
+    console.log("Select value ändrad till:", select.value); // Felsökning
+
     switch (select.value) {
         case "30":
             takprofil = 30;
             väggprofil = 30;
-            console.log("30 är vald")
-            console.log("takprofil:", takprofil, "väggprofil:", väggprofil);
+            console.log("30 är vald");
             break;
         case "45":
             takprofil = 45;
             väggprofil = 30;
-            console.log("45 är vald")
-            console.log("takprofil:", takprofil, "väggprofil:", väggprofil);
+            console.log("45 är vald");
             break;
         case "40-iso":
             takprofil = 40;
             väggprofil = 30;
-            console.log("takprofil:", takprofil, "väggprofil:", väggprofil);
+            console.log("40-iso är vald");
             break;
         default:
             takprofil = 40;
             väggprofil = 40;
-            console.log("default 40")
+            console.log("default 40");
     }
+
+    console.log("Efter switch: takprofil:", takprofil, "väggprofil:", väggprofil);
 });
 
 const clearInputs = () => {
