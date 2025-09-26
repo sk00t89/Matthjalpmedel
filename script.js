@@ -8,10 +8,10 @@ const clearBtn = document.getElementById("rensa-btn");
 const removeItem = document.getElementById("remove-btn");
 const checkbox = document.getElementsByClassName("kapad-checkbox");
 const select = document.getElementById("select-menu");
-const glasTyp10 = document.getElementById("10/12-glas");
-const glasTyp16 = document.getElementById("16-glas");
-const glasTyp20 = document.getElementById("20-glas");
-const glasTypIso = document.getElementById("40-glas");
+const glasTyp10 = document.getElementById("glas-10-12");
+const glasTyp16 = document.getElementById("glas-16");
+const glasTyp20 = document.getElementById("glas-20");
+const glasTypIso = document.getElementById("glas-40-iso");
 const optionIso = document.getElementById("iso-glas");
 const optionList = document.getElementById("select-menu")
 
@@ -53,14 +53,9 @@ document.addEventListener("visibilitychange", async () => {
 
 
 
-const getCheckboxValue = () => {
-    let checkboxValue = [];
-    document.querySelectorAll(".checkbox-glas").forEach(checkbox => {
-        if (checkbox.checked) {
-            checkboxValue.push(checkbox.value);
-        }
-    });
-    return checkboxValue.toString();
+const getradioValue = () => {
+    const checked = document.querySelector('input[name="profiltyp"]:checked');
+    return checked ? checked.value : "Ej valt";
 };
 
 
@@ -272,4 +267,5 @@ window.addEventListener('beforeinstallprompt', (e) => {
 if (window.matchMedia('(display-mode: standalone)').matches) {
     document.getElementById('installBtn').style.display = 'none';
 }
+
 
