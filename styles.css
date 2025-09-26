@@ -275,13 +275,13 @@ body {
     font-family: 'Proxima Nova', sans-serif;
 }
 
-.checkbox-glas-div {
+.radio-glas-div {
     display: flex; /* Gör att checkboxarna hamnar i rad */
     gap: 20px; /* Skapar mellanrum mellan elementen */
     padding-top: 8px;
 }
 
-.checkbox-item {
+.radio-item {
     display: flex;
     flex-direction: column; /* Gör att texten hamnar ovanför checkboxen */
     align-items: center; /* Centrerar text och checkbox */
@@ -305,3 +305,4 @@ body {
 #installBtn:hover {
     background-color: #0056b3; /* Ändrar färg vid hover */
 }
+
