@@ -60,7 +60,7 @@ body {
     justify-content: center;
     align-items: center;
     background-color: #f1f1f1;
-    //height: 100vh;
+//height: 100vh;
     font-family: 'Arial', sans-serif;
 }
 .signature {
@@ -305,4 +305,3 @@ body {
 #installBtn:hover {
     background-color: #0056b3; /* Ändrar färg vid hover */
 }
-
