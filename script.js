@@ -194,7 +194,7 @@ const generateMeasure = (t, v, h, b) => {
         öppning: öppningsNummer,
         tak: t,
         botten: b,
-        glastyp: getCheckboxValue() || "Ej valt", // Anropa funktionen här
+        glastyp: getradioValue() || "Ej valt", // Anropa funktionen här
         id: `${öppningsNummer}-${Date.now().toString()}`
     };
 
@@ -267,5 +267,6 @@ window.addEventListener('beforeinstallprompt', (e) => {
 if (window.matchMedia('(display-mode: standalone)').matches) {
     document.getElementById('installBtn').style.display = 'none';
 }
+
 
 
