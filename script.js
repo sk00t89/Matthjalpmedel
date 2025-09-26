@@ -2,11 +2,8 @@ const takInput = document.getElementById("takmått");
 const vVInput = document.getElementById("vänster-vägg");
 const hVInput = document.getElementById("höger-vägg");
 const bInput = document.getElementById("botten");
-const outputList = document.getElementById("måttLista");
 const generateBtn = document.getElementById("generera-btn");
 const clearBtn = document.getElementById("rensa-btn");
-const removeItem = document.getElementById("remove-btn");
-const checkbox = document.getElementsByClassName("kapad-checkbox");
 const select = document.getElementById("select-menu");
 const glasTyp10 = document.getElementById("glas-10-12");
 const glasTyp16 = document.getElementById("glas-16");
@@ -22,11 +19,10 @@ let kapMått = [...mätData];
 
 glasTypIso.addEventListener("change", e => {
     if (e.target.checked) {
-        optionList.value = optionIso.value; // Uppdaterar select
-        optionList.dispatchEvent(new Event("change")); // Tvingar select att köra sitt event
-        console.log("iso glas i-bockat, optionList ändrad till:", optionList.value);
+        optionList.value = optionIso.value;
+        console.log("iso glas ibockat")
     }
-});
+})
 
 
 
@@ -123,31 +119,25 @@ updatemåttLista();
 
 
 select.addEventListener("change", () => {
-    console.log("Select value ändrad till:", select.value); // Felsökning
-
     switch (select.value) {
         case "30":
             takprofil = 30;
             väggprofil = 30;
-            console.log("30 är vald");
+            console.log("30 är vald")
             break;
         case "45":
             takprofil = 45;
             väggprofil = 30;
-            console.log("45 är vald");
+            console.log("45 är vald")
             break;
         case "40-iso":
             takprofil = 40;
             väggprofil = 30;
-            console.log("40-iso är vald");
-            break;
         default:
             takprofil = 40;
             väggprofil = 40;
-            console.log("default 40");
+            console.log("default 40")
     }
-
-    console.log("Efter switch: takprofil:", takprofil, "väggprofil:", väggprofil);
 });
 
 const clearInputs = () => {
@@ -155,9 +145,7 @@ const clearInputs = () => {
     vVInput.value = "";
     hVInput.value = "";
     bInput.value = "";
-    glasTyp10.checked = false;
-    glasTyp16.checked = false;
-    glasTyp20.checked = false;
+
 };
 
 
@@ -267,6 +255,3 @@ window.addEventListener('beforeinstallprompt', (e) => {
 if (window.matchMedia('(display-mode: standalone)').matches) {
     document.getElementById('installBtn').style.display = 'none';
 }
-
-
-
