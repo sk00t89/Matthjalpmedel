@@ -32,19 +32,19 @@
 <form  id="inputform">
     <div class="inputform">
         <div class="input-group">
-            <label for="takmått">Takmått</label>
+            <label for="takmått">Takmått (mm)</label>
             <input type="number" id="takmått">
         </div>
         <div class="input-group">
-            <label for="vänster-vägg">Vänster vägg</label>
+            <label for="vänster-vägg">Vänster vägg (mm)</label>
             <input type="number" id="vänster-vägg">
         </div>
         <div class="input-group">
-            <label for="höger-vägg">Höger vägg</label>
+            <label for="höger-vägg">Höger vägg (mm)</label>
             <input type="number" id="höger-vägg">
         </div>
         <div class="input-group">
-            <label for="botten">Botten</label>
+            <label for="botten">Botten (mm)</label>
             <input type="number" id="botten">
         </div>
     </div>
@@ -74,8 +74,8 @@
 
 
 <div class="btnDiv">
-    <button class="generera-btn" id="generera-btn">Generera kapmått</button>
-    <button class="rensa-btn" id="rensa-btn">Rensa</button>
+    <button class="generera-btn" id="generera-btn" type="button">Generera kapmått</button>
+    <button class="rensa-btn" id="rensa-btn" type="button">Rensa</button>
 </div>
 
 <div class="outputDiv" id="outputDiv">
@@ -85,7 +85,7 @@
     </ul>
 </div>
 
-<script src="script.js"></script>
+<script src="script.js?v=dev4"></script>
 <script>if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/Matthjalpmedel/service-worker.js')
         .then(() => console.log("Service Worker registrerad!"))
@@ -93,5 +93,3 @@
 }</script>
 </body>
 </html>
-
-
