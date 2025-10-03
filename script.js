@@ -177,7 +177,15 @@ const generateMeasure = (t, v, h, b) => {
         alert("Du har angivit felaktiga mått.");
         return;
     }
+    generateBtn.style.backgroundColor = "lightgreen";
+    generateBtn.textContent = "✔ Genererat!";
 
+    // byt tillbaka efter 1.5 sek
+    setTimeout(() => {
+        generateBtn.style.backgroundColor = "";
+        generateBtn.textContent = "Generera kapmått";
+    }, 500);
+    
     const öppningsNummer = kapMått.length + 1;
     const kapMåttObject = {
         öppning: öppningsNummer,
@@ -256,4 +264,3 @@ window.addEventListener('beforeinstallprompt', (e) => {
 if (window.matchMedia('(display-mode: standalone)').matches) {
     document.getElementById('installBtn').style.display = 'none';
 }
-
