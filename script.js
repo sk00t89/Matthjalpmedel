@@ -133,6 +133,7 @@ select.addEventListener("change", () => {
         case "40-iso":
             takprofil = 40;
             väggprofil = 30;
+            break;
         default:
             takprofil = 40;
             väggprofil = 40;
@@ -255,3 +256,4 @@ window.addEventListener('beforeinstallprompt', (e) => {
 if (window.matchMedia('(display-mode: standalone)').matches) {
     document.getElementById('installBtn').style.display = 'none';
 }
+
